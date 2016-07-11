@@ -91,3 +91,6 @@ ENV/
 # vagrant
 .vagrant/*
 Vagrantfile
+
+# django
+*migrations*
