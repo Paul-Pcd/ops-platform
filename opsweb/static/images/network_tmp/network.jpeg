@@ -1,0 +1,234 @@
+
+
+
+<!DOCTYPE html PUBLIC "-W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="ctl00_Head1"><title>
+	Orion Network Performance Monitor
+</title><link rel="shortcut icon" href="/favicon.ico" /><link rel="stylesheet" type="text/css" href="/Orion/styles/MainLayout.css" /><link rel="stylesheet" type="text/css" href="/Orion/styles/NavTabs.css" />
+    <script type="text/javascript" src="/Orion/js/cookie.js"></script>
+    
+	<script type="text/javascript" src="/Orion/js/jquery.js"></script>
+	<script type="text/javascript" src="/Orion/js/jQueryAjaxUpdatePanelFix.js"></script>
+	<script type="text/javascript" src="/Orion/js/jquery/ui.core.js"></script>
+	<script type="text/javascript" src="/Orion/js/jquery/ui.dialog.js" ></script>
+	
+	
+    <style type="text/css">
+        #userName {
+          background-image: none;
+          vertical-align: middle;
+        }
+    </style>
+	
+
+
+	<!-- Stylesheets left here to support legacy resources -->
+	<link rel="stylesheet" type="text/css" href="/SolarWinds.css" /><link rel="stylesheet" type="text/css" href="/Events.css" />
+    <script type="text/javascript" language="javascript" src="/Orion/js/NotificationPanel.js"></script>
+    <!--[if lte IE 6]>
+      <style type="text/css">
+      /* Browsers that do CSS2 positioning properly can handle placing the footer using CSS only. 
+		IE6 needs to use this CSS rule and the javascript below to get the job done. */
+        div#container {
+          height: 100%;
+        }
+        UL.tabNavigation {
+          height: 21px!important;
+        }
+        div.tabs {
+          height: 45px;
+        }
+      </style>
+      <script type="text/javascript" src="/Orion/js/ie6footer.js"></script>
+    <![endif]-->
+    
+    <!--[if lte IE 7]>
+        <style type="text/css">
+            .bc_itemselected
+            {
+                padding-bottom: 0px !important;
+            }
+        </style>
+    <![endif]-->
+
+    
+	
+<link href="/WebEngine/Resources/ArmyGreen.css" type="text/css" rel="stylesheet" /><link href="/Orion/js/jquery/jquery.cluetip.css" type="text/css" rel="stylesheet" /><link href="/Orion/js/jquery/jquery.tooltip.css" type="text/css" rel="stylesheet" /><link href="/Orion/styles/NetObjectTips.css" type="text/css" rel="stylesheet" /></head>
+<body id="ctl00_Body">
+	
+
+<script type="text/javascript" src="/Orion/js/jquery.js"></script>
+<script type="text/javascript" src="/Orion/js/jQueryAjaxUpdatePanelFix.js"></script>
+<script type="text/javascript" src="/Orion/js/jquery/jquery.dimensions.js"></script>
+<script type="text/javascript" src="/Orion/js/jquery/jquery.hoverIntent.js"></script>
+<script type="text/javascript" src="/Orion/js/jquery/jquery.cluetip.js"></script>
+<script type="text/javascript" src="/Orion/js/jquery/jquery.tooltip.js"></script>
+<script type="text/javascript" src="/Orion/js/jquery/jquery.livequery.js"></script>
+<script type="text/javascript" src="/Orion/js/NetObjectTips.js"></script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var NetObjectTypeToTipPagePath = function (dict) {
+	var map = {};
+	for (var i = 0; i < dict.length; ++i)
+		map[dict[i].Key] = dict[i].Value;
+	return map;
+}([{"Key":"AA","Value":null},{"Key":"AM","Value":null},{"Key":"N","Value":"\/Orion\/NetPerfMon\/NodePopup.aspx"},{"Key":"V","Value":null},{"Key":"I","Value":"\/Orion\/NPM\/InterfacePopup.aspx"},{"Key":"NN","Value":null},{"Key":"NI","Value":null},{"Key":"NA","Value":null},{"Key":"NC","Value":null},{"Key":"NL1","Value":null},{"Key":"ND","Value":null},{"Key":"NE","Value":null},{"Key":"NG","Value":null},{"Key":"NP","Value":null},{"Key":"NTS","Value":null},{"Key":"CCM","Value":null}]);
+//]]>
+</script>
+
+	<div id="container">
+		<div id="content">
+			
+				<table id="pageHeader" width="100%" cellpadding="0" cellspacing="0">
+					<tr>
+						<td align="left">
+							<img src="/NetPerfMon/images/SolarWinds.Logo.gif" alt="Site Logo"/>
+						</td>
+						<td id="userName">
+							
+									<div align="right"><img src="/Orion/Images/Logo.Navbar.gif" alt="SolarWinds Logo" /></div>
+								
+						</td>
+					</tr>
+
+				</table>
+			
+		    
+		    
+		    
+			<form name="aspnetForm" method="post" action="Login.aspx?ReturnUrl=%2fOrion%2fNetPerfMon%2fNetworkMap.aspx%3fMap%3d0b70b523-3b3d-4de9-93d0-d5be8d53ec80.OrionMap%26Scale%3d105%26r%3d1162115555&amp;Map=0b70b523-3b3d-4de9-93d0-d5be8d53ec80.OrionMap&amp;Scale=105&amp;r=1162115555" id="aspnetForm">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNTYxOTY1NDU4D2QWAmYPZBYEAgEPZBYCAgsPZBYCZg8WAh4LXyFJdGVtQ291bnRmZAIDD2QWBAIDD2QWAgIFD2QWAgIFDxYCHgdWaXNpYmxlaGQCBQ8WAh8BaGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFJWN0bDAwJENvbnRlbnRQbGFjZUhvbGRlcjEkTG9naW5CdXR0b25ssL1F+9cEZvbb00Irhhbr2Pz3ig==" />
+
+
+<script type="text/javascript">
+//<![CDATA[
+var __cultureInfo = '{"name":"zh-CN","numberFormat":{"CurrencyDecimalDigits":2,"CurrencyDecimalSeparator":".","IsReadOnly":true,"CurrencyGroupSizes":[3],"NumberGroupSizes":[3],"PercentGroupSizes":[3],"CurrencyGroupSeparator":",","CurrencySymbol":"￥","NaNSymbol":"非数字","CurrencyNegativePattern":2,"NumberNegativePattern":1,"PercentPositivePattern":1,"PercentNegativePattern":1,"NegativeInfinitySymbol":"负无穷大","NegativeSign":"-","NumberDecimalDigits":2,"NumberDecimalSeparator":".","NumberGroupSeparator":",","CurrencyPositivePattern":0,"PositiveInfinitySymbol":"正无穷大","PositiveSign":"+","PercentDecimalDigits":2,"PercentDecimalSeparator":".","PercentGroupSeparator":",","PercentSymbol":"%","PerMilleSymbol":"‰","NativeDigits":["0","1","2","3","4","5","6","7","8","9"],"DigitSubstitution":1},"dateTimeFormat":{"AMDesignator":"上午","Calendar":{"MinSupportedDateTime":"\/Date(-62135596800000)\/","MaxSupportedDateTime":"\/Date(253402271999999)\/","AlgorithmType":1,"CalendarType":1,"Eras":[1],"TwoDigitYearMax":2029,"IsReadOnly":true},"DateSeparator":"-","FirstDayOfWeek":0,"CalendarWeekRule":0,"FullDateTimePattern":"yyyy\u0027年\u0027M\u0027月\u0027d\u0027日\u0027 H:mm:ss","LongDatePattern":"yyyy\u0027年\u0027M\u0027月\u0027d\u0027日\u0027","LongTimePattern":"H:mm:ss","MonthDayPattern":"M\u0027月\u0027d\u0027日\u0027","PMDesignator":"下午","RFC1123Pattern":"ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027","ShortDatePattern":"yyyy-M-d","ShortTimePattern":"H:mm","SortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss","TimeSeparator":":","UniversalSortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027","YearMonthPattern":"yyyy\u0027年\u0027M\u0027月\u0027","AbbreviatedDayNames":["日","一","二","三","四","五","六"],"ShortestDayNames":["日","一","二","三","四","五","六"],"DayNames":["星期日","星期一","星期二","星期三","星期四","星期五","星期六"],"AbbreviatedMonthNames":["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月",""],"MonthNames":["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月",""],"IsReadOnly":true,"NativeCalendarName":"公历","AbbreviatedMonthGenitiveNames":["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月",""],"MonthGenitiveNames":["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月",""]}}';//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=9uT9Nvst4Mr7Ga9nhTz6IgwPS8urUbTc22gafBGBNGWPTyFFU5kb7gFC7SG-KJq-HxfpsxQoflTtSWXuBfBvwh0eNlWEsroAdrUYunlFIGmvyv7x5InIW2k2dJyZS_jBXcyFhxPT8A9AdsJHH5_MIcAAQlgUT3FN7CPJE8oh-Jw-4WJl0&amp;t=1c096440" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="01070692" />
+			    
+                    
+                
+                
+	<!-- no menubar on the login page -->
+
+				
+    <div align="center" id="contentHeader">
+	    <table class="loginTable" id="fancyBackground">
+		    <tr>
+			    <td colspan="2" class="onecol"><img class="title" src="images/login-title.gif" alt="Orion Network Performance Monitor" />
+				</td>
+			</tr>
+			<tr>
+			    <td class="col1">User Name:
+				</td>
+				<td class="col2">
+				    <input name="ctl00$ContentPlaceHolder1$Username" type="text" id="ctl00_ContentPlaceHolder1_Username" />
+				    &nbsp;
+				</td>
+			</tr>
+			<tr>
+			    <td class="col1">Password:
+				</td>
+				<td class="col2"><input name="ctl00$ContentPlaceHolder1$Password" type="password" id="ctl00_ContentPlaceHolder1_Password" />
+				</td>
+			</tr>
+			<tr>
+			    <td class="col1">
+				    &nbsp;
+				</td>
+				<td class="col2">
+				    <input type="image" name="ctl00$ContentPlaceHolder1$LoginButton" id="ctl00_ContentPlaceHolder1_LoginButton" src="images/Button.Login.gif" alt="Login" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$LoginButton&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" border="0" />
+				</td>
+			</tr>
+			<tr>
+			    <td colspan="2" class="onecol"><span class="StatusMessage">&nbsp;</span>
+				</td>
+			</tr>
+		</table>
+
+		<table class="loginTable">
+		    <tr>
+			    <td>
+					<p id="CookiesNotWorking" style="display:none; font-weight: bold; color:red;">Your browser is rejecting cookies from this website. You will not be able to log in until you fix this.</p>
+    
+					
+
+					<p id="SiteLoginText"></p>
+
+					<script type="text/javascript">
+					    //<![CDATA[
+						var login = document.getElementById('ctl00_ContentPlaceHolder1_Username');
+						if (login)
+							login.focus();
+						
+						loginVerifyCookies();
+						
+						function loginVerifyCookies()
+						{
+							if(getCookie('TestCookieSupport') == null)
+							{
+								document.getElementById('CookiesNotWorking').style.display = "block";
+							}
+						}
+
+						function getCookie(NameOfCookie)
+						{
+							if (document.cookie.length > 0)
+							{
+								var begin = document.cookie.indexOf(NameOfCookie+"=");
+								if (begin != -1)
+								{
+									begin += NameOfCookie.length+1;
+									var end = document.cookie.indexOf(";", begin);
+									if (end == -1) end = document.cookie.length;
+									return unescape(document.cookie.substring(begin, end)); }
+							}
+
+							return null;
+			            }
+			        //]]>
+					</script>
+				</td>
+			</tr>
+		</table>
+    </div>
+   
+    
+
+			
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.initialize();
+//]]>
+</script>
+</form>
+			
+			
+
+			
+		</div>
+
+					
+			<div id="footer">SolarWinds Orion Core 2010.1.0, NCM 6.0, NPM 10.0.0, APM 2.5.0, NTA 3.5.0.0 &copy; 1995-2010 All Rights Reserved</div>
+		
+	</div>
+	
+    <script type="text/javascript">
+        var OrionTabSettings = {
+            CurrentTabId : 1,
+            TabsSensitivity : 3,
+            TabsMouseOverTimeout : 50,
+            TabsMouseOutTimeout : 700
+        };
+    </script>                
+	
+	<script type="text/javascript" src="/Orion/js/OrionMaster.js"></script>
+</body>
+</html>

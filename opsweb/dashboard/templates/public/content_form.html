@@ -1,0 +1,178 @@
+<!-- page header -->
+<div class="pageheader">
+
+
+<h2><i class="fa fa-check-square" style="line-height: 48px;padding-left: 1px;"></i> 机房 </h2>
+
+
+<div class="breadcrumbs">
+  <ol class="breadcrumb">
+    <li>你的位置</li>
+    <li><a href="index.html">资讯平台</a></li>
+    <li><a href="index.html">控制台</a></li>
+    <li class="active">机房</li>
+  </ol>
+</div>
+
+</div>
+<!-- /page header -->
+<!-- content main container -->
+<div class="main">
+
+
+
+
+<!-- row -->
+<div class="row">
+
+  <!-- col 12 -->
+  <div class="col-md-12">
+
+
+
+    <!-- tile -->
+    <section class="tile color transparent-black">
+
+
+
+      <!-- tile header -->
+      <div class="tile-header">
+        <h1><strong>基本</strong> 验证</h1>
+        <div class="controls">
+          <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+          <a href="#" class="remove"><i class="fa fa-times"></i></a>
+        </div>
+      </div>
+      <!-- /tile header -->
+
+      <!-- tile body -->
+      <div class="tile-body">
+
+        <form class="form-horizontal" role="form" parsley-validate id="basicvalidations">
+
+          <div class="form-group">
+            <label for="fullname" class="col-sm-2 control-label">名字 *</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="fullname" parsley-trigger="change" parsley-required="true" parsley-minlength="4" parsley-validation-minlength="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="col-sm-2 control-label">Email *</label>
+            <div class="col-sm-8">
+              <input type="email" class="form-control" id="email" parsley-trigger="change" parsley-required="true" parsley-minlength="4" parsley-type="email" parsley-validation-minlength="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="col-sm-2 control-label">密码 *</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="password" parsley-trigger="change" parsley-required="true" parsley-minlength="6" parsley-type="alphanum" parsley-validation-minlength="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="passwordconfirm" class="col-sm-2 control-label">密码确认 *</label>
+            <div class="col-sm-8">
+              <input type="password" class="form-control" id="passwordconfirm" parsley-trigger="change" parsley-required="true" parsley-minlength="6" parsley-type="alphanum" parsley-validation-minlength="1" parsley-equalto="#password">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="website" class="col-sm-2 control-label">网站</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="website" parsley-trigger="change" parsley-minlength="4" parsley-type="url" parsley-validation-minlength="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="birthdate" class="col-sm-2 control-label">出生日期</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" id="birthdate" parsley-trigger="change" parsley-minlength="4" parsley-type="dateIso" parsley-validation-minlength="1" placeholder="YYYY-MM-DD">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input05" class="col-sm-2 control-label">描述</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" id="input05" rows="3" parsley-trigger="keyup" parsley-rangelength="[20,200]" parsley-validation-minlength="1"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="input07" class="col-sm-2 control-label">正常选择框 *</label>
+            <div class="col-sm-8" id="selectbox">
+              <select class="chosen-select chosen-transparent form-control" id="input07" parsley-trigger="change" parsley-required="true" parsley-error-container="#selectbox">
+                <option value="">请选择</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label for="input08" class="col-sm-2 control-label">多选择框 *</label>
+            <div class="col-sm-8" id="selectbox2">
+              <select multiple class="chosen-select chosen-transparent form-control" id="input08" parsley-trigger="change" parsley-required="true" parsley-error-container="#selectbox2">
+                <option value="11">1</option>
+                <option value="222">2</option>
+                <option value="33">3</option>
+                <option value="44">4</option>
+                <option value="55">5</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">至少勾选2个复选框 *</label>
+            <div class="col-sm-8" id="myproperlabel">
+              <div class="checkbox check-transparent">
+                <input type="checkbox" value="1" id="opt01" parsley-group="mygroup" parsley-trigger="change" parsley-required="true" parsley-mincheck="2" parsley-error-container="#myproperlabel .last">
+                <label for="opt01">选项 1</label>
+              </div>
+              <div class="checkbox check-transparent">
+                <input type="checkbox" value="1" id="opt02" parsley-group="mygroup" parsley-trigger="change" parsley-required="true" parsley-mincheck="2" parsley-error-container="#myproperlabel .last">
+                <label for="opt02">选项 2</label>
+              </div>
+              <div class="checkbox check-transparent last">
+                <input type="checkbox" value="1" id="opt03" parsley-group="mygroup" parsley-trigger="change" parsley-required="true" parsley-mincheck="2" parsley-error-container="#myproperlabel .last">
+                <label for="opt03">选项 3</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group form-footer">
+            <div class="col-sm-offset-4 col-sm-8">
+              <button type="submit" class="btn btn-primary">提交</button>
+              <button type="reset" class="btn btn-default">重置</button>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+      <!-- /tile body -->
+
+
+
+
+    </section>
+    <!-- /tile -->
+
+
+
+
+  </div>
+  <!-- /col 6 -->
+
+
+  <!-- col 12 -->
+
+
+
+
+</div>
+<!-- /row -->

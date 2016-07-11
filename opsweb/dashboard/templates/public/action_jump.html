@@ -1,0 +1,59 @@
+{% extends "ncfgroup/base.html" %}
+
+{% block loader %}
+{% endblock %}
+
+{% block position %}
+{% endblock %}
+
+
+{% block js %}
+    <script>
+
+        function get_err_msg(data){
+            var retmsg;
+            console.log(data)
+            msg = JSON.parse(data);
+            for(var name in msg){
+                //retmsg = name + ": "+ msg[name][0]['message']
+                retmsg = msg[name][0]['message']
+
+            }
+            return retmsg
+        }
+
+        var next_url = "{{ next_url }}";
+        var data = {{ message|safe }};
+
+
+        $(function(){
+            if(data.status == 0){
+                swal({
+                    title: "操作成功",
+                    text:"",
+                    type: "success"
+                },function(){
+                    if(next_url != ""){
+                        setTimeout(function(){
+                            window.location.href = next_url
+                        }, 150)
+                    }
+
+                })
+            }else{
+                swal({
+                    title: "操作失败",
+                    text: get_err_msg(data.errmsg),
+                    type: "error"
+                },function(){
+                    if(next_url != ""){
+                        setTimeout(function(){
+                            window.location.href = next_url
+                        }, 150)
+                    }
+
+                })
+            }
+        })
+    </script>
+{% endblock %}
