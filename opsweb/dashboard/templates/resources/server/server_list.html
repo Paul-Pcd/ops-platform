@@ -1,0 +1,133 @@
+{% extends "public/base.html" %}
+{% block sidebar %}
+    {% include "public/sidebar_resource.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col 12 -->
+        <div class="col-md-12">
+            <!-- tile -->
+            <section class="tile transparent">
+
+                <!-- tile header -->
+                <div class="tile-header transparent">
+                    <h1><strong>服务器列表</strong>  </h1>
+                    <div class="controls">
+                      <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+                      <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <!-- /tile header -->
+
+                <!-- tile body -->
+                <div class="tile-body color transparent-black rounded-corners">
+                    <div class="table-responsive">
+
+
+                        <table  class="table table-datatable table-custom table-hover" id="basicDataTable">
+
+                            <thead>
+
+                                <tr>
+                                    <th>#</th>
+                                    <!--
+                                    <th >业务线</th>
+                                    <th >产品线</th>
+                                    -->
+                                    <th >主机名</th>
+                                    <th >内网IP</th>
+                                    <th >CPU梳数</th>
+                                    <th >硬盘信息</th>
+                                    <th >内存信息</th>
+                                    <th >上次检测时间</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for server in server_list %}
+                                    <tr class="gradeA">
+                                        <td> {{ forloop.counter }} </td>
+                                        <!--
+                                        <td> {{ server.service_id }} </td>
+                                        <td> {{ server.server_purpose }} </td>
+                                        -->
+                                        <td> {{ server.hostname }} </td>
+                                        <td> {{ server.inner_ip }} </td>
+                                        <td> {{ server.server_cpu}} </td>
+                                        <td> {{ server.server_disk }} G </td>
+                                        <td> {{ server.server_mem }} </td>
+                                        <td> {{ server.check_update_time|date:"Y-m-d H:i:s"  }} </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+
+
+                        </table>
+
+
+
+
+                    </div>
+
+                </div>
+                <!-- /tile body -->
+
+
+
+            </section>
+            <!-- /tile -->
+        </div>
+        <!-- /col 12 -->
+
+    </div>
+    <!-- /row -->
+
+</div>
+
+{% endblock %}
+{% block js %}
+<script src="/static/assets/js/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/assets/js/vendor/datatables/ColReorderWithResize.js"></script>
+<script src="/static/assets/js/vendor/datatables/colvis/dataTables.colVis.min.js"></script>
+<script src="/static/assets/js/vendor/datatables/tabletools/ZeroClipboard.js"></script>
+<script src="/static/assets/js/vendor/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script src="/static/assets/js/vendor/datatables/dataTables.bootstrap.js"></script>
+<script>
+
+
+    $(function(){
+      // Add custom class to pagination div
+      $.fn.dataTableExt.oStdClasses.sPaging = 'dataTables_paginate paging_bootstrap paging_custom';
+
+      /* Build the DataTable with third column using our custom sort functions */
+      var oTable01 = $('#basicDataTable').dataTable({
+        "sDom":
+          "R<'row'<'col-md-6'l><'col-md-6'f>r>"+
+          "t"+
+          "<'row'<'col-md-4 sm-center'i><'col-md-4'><'col-md-4 text-right sm-center'p>>",
+        "oLanguage": {
+          "sSearch": ""
+        },
+        "aaSorting": [ [0,'asc'] ],
+        "fnInitComplete": function(oSettings, json) {
+          $('.dataTables_filter input').attr("placeholder", "Search");
+        }
+      });
+
+      //initialize chosen
+      $('.dataTables_length select').chosen({disable_search_threshold: 10});
+
+    })
+</script>
+
+{% endblock %}

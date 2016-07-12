@@ -94,3 +94,7 @@ Vagrantfile
 
 # django
 *migrations*
+
+# ide
+.DS_Store
+*/.idea
