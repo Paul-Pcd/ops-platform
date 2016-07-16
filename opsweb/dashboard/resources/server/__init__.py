@@ -1,11 +1,16 @@
 # coding:utf-8
 
 import time
+import json
 import logging
 
 from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView, ListView, View
-from dashboard.models import Server
+from django.http import Http404
+from django.conf import settings
+
+from dashboard.models import Server, Status
+
 
 
 log = logging.getLogger(__name__)
@@ -47,3 +52,30 @@ class ServerListView(ListView):
     def get(self, request, *args, **kwargs):
         response = super(ServerListView, self).get(request, *args, **kwargs)
         return response
+
+
+
+class ServerModifyStatusView(TemplateView):
+
+    template_name = "resources/server/server_modify_status.html"
+
+    def get(self, request, *args, **kwargs):
+        server_id = request.GET.get("server_id")
+
+        if not server_id or not server_id.isalnum():
+            raise Http404
+        try:
+            server = Server.objects.get(pk=server_id)
+            status = Status.objects.all()
+            return render(request, self.template_name, {"server": server, "statuses": status})
+        except Server.DoesNotExist:
+            raise Http404
+
+
+    def post(self, request):
+        ret = {"status": 0}
+        try:
+            Server.objects.filter(pk=request.POST.get("id", 0)).update(status=request.POST.get("status",None))
+            return render(request, settings.ACTION_JUMP, {"message": json.dumps(ret), "next_url": "/resources/server/list/"})
+        except Exception, e:
+            raise Http404

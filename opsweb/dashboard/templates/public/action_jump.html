@@ -1,4 +1,4 @@
-{% extends "ncfgroup/base.html" %}
+{% extends "public/base.html" %}
 
 {% block loader %}
 {% endblock %}
@@ -9,25 +9,13 @@
 
 {% block js %}
     <script>
-
-        function get_err_msg(data){
-            var retmsg;
-            console.log(data)
-            msg = JSON.parse(data);
-            for(var name in msg){
-                //retmsg = name + ": "+ msg[name][0]['message']
-                retmsg = msg[name][0]['message']
-
-            }
-            return retmsg
-        }
-
         var next_url = "{{ next_url }}";
         var data = {{ message|safe }};
 
 
         $(function(){
             if(data.status == 0){
+                document.title = "操作成功";
                 swal({
                     title: "操作成功",
                     text:"",
@@ -41,9 +29,10 @@
 
                 })
             }else{
+                document.title = "操作失败";
                 swal({
                     title: "操作失败",
-                    text: get_err_msg(data.errmsg),
+                    text: data.errmsg,
                     type: "error"
                 },function(){
                     if(next_url != ""){

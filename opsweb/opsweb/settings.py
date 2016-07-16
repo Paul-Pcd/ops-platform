@@ -108,3 +108,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+
+
+ACTION_JUMP = "public/action_jump.html"

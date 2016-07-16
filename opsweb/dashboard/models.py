@@ -1,3 +1,5 @@
+# coding:utf-8
+
 from django.db import models
 
 # Create your models here.
@@ -20,7 +22,7 @@ class Server(models.Model):
     server_cpu      = models.CharField(max_length=250, null=True)
     server_disk     = models.CharField(max_length=100, null=True)
     server_mem      = models.CharField(max_length=100, null=True)
-    status          = models.IntegerField(db_index=True, null=True)
+    status          = models.CharField(max_length=100,db_index=True, null=True)
     remark          = models.TextField(null=True)
     last_op_time    = models.DateTimeField(null=True)
     last_op_people  = models.IntegerField(null=True)
@@ -39,3 +41,10 @@ class Server(models.Model):
     class Meta:
         db_table = 'resources_server'
         ordering = ['id']
+
+
+class Status(models.Model):
+    name            = models.CharField(max_length=100, unique=True, db_index=True)
+
+    class Meta:
+        db_table = "resources_status"
