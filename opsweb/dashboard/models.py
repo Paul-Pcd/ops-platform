@@ -48,3 +48,11 @@ class Status(models.Model):
 
     class Meta:
         db_table = "resources_status"
+
+
+class Product(models.Model):
+    service_name    = models.CharField(max_length=32)
+    pid             = models.IntegerField(db_index=True)
+    module_letter   = models.CharField(max_length=32)
+    dev_interface   = models.CharField(max_length=100, null=True)
+    op_interface    = models.CharField(max_length=100, null=True)

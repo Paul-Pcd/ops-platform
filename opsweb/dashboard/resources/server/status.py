@@ -31,10 +31,10 @@ class StatusAddView(TemplateView):
             try:
                 status = Status(**status_from.cleaned_data)
                 status.save()
-            except IntegrityError ,e:
+            except Exception, e:
                 print e.args
                 ret['status'] = 3
-                ret['errmsg'] = "该记录已存在"
+                ret['errmsg'] = e.args
         else:
             ret['status'] = 1
             ret['errmsg'] = status_from.errors.as_json()
