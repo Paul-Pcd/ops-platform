@@ -44,10 +44,8 @@
 
                                 <tr>
                                     <th>#</th>
-                                    <!--
                                     <th >业务线</th>
                                     <th >产品线</th>
-                                    -->
                                     <th >主机名</th>
                                     <th >内网IP</th>
                                     <th >状态</th>
@@ -65,10 +63,22 @@
                                 {% for server in server_list %}
                                     <tr class="gradeA">
                                         <td> {{ forloop.counter }} </td>
-                                        <!--
-                                        <td> {{ server.service_id }} </td>
-                                        <td> {{ server.server_purpose }} </td>
-                                        -->
+
+                                        <td>
+                                            {% for product in products %}
+                                                {% if server.service_id == product.id %}
+                                                    {{ product.service_name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for product in products %}
+                                                {% if server.server_purpose == product.id %}
+                                                    {{ product.service_name }}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </td>
+
                                         <td> {{ server.hostname }} </td>
                                         <td> {{ server.inner_ip }} </td>
                                         <td> {{ server.status }} </td>
@@ -83,7 +93,8 @@
                                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    <li><a href="/resources/server/modify/status/?server_id={{ server.id }}">修改状态</a></li>
+                                                    <li><a href="/resources/server/modify/status/?server_id={{ server.id }}">状态</a></li>
+                                                    <li><a href="/resources/server/modify/product/?server_id={{ server.id }}">产品线</a></li>
                                                 </ul>
                                             </div>
                                         </td>

@@ -2,6 +2,7 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView, ListView, View
 from django.conf import settings
+from django.core import serializers
 
 from dashboard.models import Product
 from dashboard.forms.resources import ProductForm
@@ -33,3 +34,7 @@ class ProductAddView(TemplateView):
             ret['errmsg'] = form.errors.as_json()
         return render(request, settings.ACTION_JUMP, {"message": ret, "next_url": "/resources/product/add/"})
 
+class ProductJsonResponse(View):
+    def get(self, request):
+        product = serializers.serialize('json', Product.objects.all())
+        return HttpResponse(product, content_type='json')

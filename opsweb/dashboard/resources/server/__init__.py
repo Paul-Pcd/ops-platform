@@ -9,7 +9,7 @@ from django.views.generic import TemplateView, ListView, View
 from django.http import Http404
 from django.conf import settings
 
-from dashboard.models import Server, Status
+from dashboard.models import Server, Status, Product
 
 
 
@@ -47,6 +47,7 @@ class ServerListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ServerListView, self).get_context_data(**kwargs)
         context["title"] = "服务器列表信息"
+        context['products'] = Product.objects.all()
         return context
 
     def get(self, request, *args, **kwargs):
@@ -79,3 +80,35 @@ class ServerModifyStatusView(TemplateView):
             return render(request, settings.ACTION_JUMP, {"message": json.dumps(ret), "next_url": "/resources/server/list/"})
         except Exception, e:
             raise Http404
+
+class ServerModifyProductView(TemplateView):
+
+    template_name = "resources/server/server_modify_product.html"
+
+    def get(self, request, *args, **kwargs):
+        server_id = request.GET.get("server_id")
+
+        if not server_id or not server_id.isalnum():
+            raise Http404
+        try:
+            server = Server.objects.get(pk=server_id)
+            products = Product.objects.all()
+            return render(request, self.template_name, {"server": server, "products": products})
+        except Server.DoesNotExist:
+            raise Http404
+
+
+    def post(self, request):
+        ret = {"status": 0}
+
+
+        data = {
+            "server_purpose": request.POST.get("server_purpose", 0),
+            "service_id": request.POST.get("service_id", 0)
+        }
+        try:
+            Server.objects.filter(pk=request.POST.get("id", 0)).update(**data)
+            return render(request, settings.ACTION_JUMP, {"message": json.dumps(ret), "next_url": "/resources/server/list/"})
+        except Exception, e:
+            raise Http404
+
