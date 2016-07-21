@@ -9,8 +9,7 @@ from django.views.generic import TemplateView, ListView, View
 from django.http import Http404
 from django.conf import settings
 
-from dashboard.models import Server, Status, Product
-
+from dashboard.models import Server, Status, Product, Idc
 
 
 log = logging.getLogger(__name__)
@@ -111,4 +110,63 @@ class ServerModifyProductView(TemplateView):
             return render(request, settings.ACTION_JUMP, {"message": json.dumps(ret), "next_url": "/resources/server/list/"})
         except Exception, e:
             raise Http404
+
+
+
+class Treeview():
+    def __init__(self):
+        self.idc_info = Idc.objects.all()
+        self.product_info = Product.objects.all()
+        self.data = []
+
+    def get_child_node(self):
+        ret = []
+        state = {'disabled': 'false'}
+        for p in filter(lambda x:  True if x.pid == 0 else False, self.product_info):
+            node = {}
+            node['text'] = p.service_name
+            node['id'] = p.id
+            node['type'] = 'service'
+            node['icon'] = "glyphicon glyphicon-th"
+            node['selectable'] = "false"
+            #node['state'] = state
+            node['nodes'] = self.get_grant_node(p.id)
+            ret.append(node)
+        return ret
+
+    def get_grant_node(self, pid):
+        ret = []
+        for p in filter(lambda x :True if x.pid == pid else False, self.product_info):
+            node = {}
+            node['text'] = p.module_letter
+            node['id'] = p.id
+            node['type'] = 'product'
+            node['icon'] = "glyphicon glyphicon-file"
+            node['pid'] = pid
+            ret.append(node)
+        return ret
+
+    def get(self,idc):
+        child = self.get_child_node()
+        if not idc:
+            return child
+        ret = []
+        for idc in self.idc_info:
+            node = {}
+            node['text'] = idc.name
+            node['id'] = idc.id
+            node['type'] = 'idc'
+            node['nodes'] = child
+            ret.append(node)
+        return ret
+
+
+
+
+"""
+    获取节点树信息
+"""
+def get_treeview_data(idc=True):
+    treeview = Treeview()
+    return treeview.get(idc)
 

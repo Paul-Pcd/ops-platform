@@ -7,6 +7,11 @@
 {% block css %}
     <style>
         table .gradeA .dropdown-menu{min-width: 100px;}
+
+    #host_list{ height: 250px; overflow-y: scroll;border:1px solid #ccc; width:300px;padding-left:10px;float:left;margin-right:20px;}
+    .modal-body{min-height: 280px;}
+    #zabbix_group{width:200px;}
+
     </style>
 
 {% endblock %}
@@ -26,6 +31,7 @@
                 <!-- tile header -->
                 <div class="tile-header transparent">
                     <h1><strong>服务器列表</strong>  </h1>
+
                     <div class="controls">
                       <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
                       <a href="#" class="remove"><i class="fa fa-times"></i></a>
@@ -125,6 +131,8 @@
 
 </div>
 
+
+
 {% endblock %}
 {% block js %}
 <script src="/static/assets/js/vendor/datatables/jquery.dataTables.min.js"></script>
@@ -137,11 +145,11 @@
 
 
     $(function(){
-      // Add custom class to pagination div
-      $.fn.dataTableExt.oStdClasses.sPaging = 'dataTables_paginate paging_bootstrap paging_custom';
+        // Add custom class to pagination div
+        $.fn.dataTableExt.oStdClasses.sPaging = 'dataTables_paginate paging_bootstrap paging_custom';
 
-      /* Build the DataTable with third column using our custom sort functions */
-      var oTable01 = $('#basicDataTable').dataTable({
+        /* Build the DataTable with third column using our custom sort functions */
+        var oTable01 = $('#basicDataTable').dataTable({
         "sDom":
           "R<'row'<'col-md-6'l><'col-md-6'f>r>"+
           "t"+
@@ -153,10 +161,11 @@
         "fnInitComplete": function(oSettings, json) {
           $('.dataTables_filter input').attr("placeholder", "Search");
         }
-      });
+        });
 
-      //initialize chosen
-      $('.dataTables_length select').chosen({disable_search_threshold: 10});
+        //initialize chosen
+        $('.dataTables_length select').chosen({disable_search_threshold: 10});
+
 
     })
 </script>

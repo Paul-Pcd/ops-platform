@@ -1,0 +1,107 @@
+{% extends "public/base.html" %}
+
+{% block sidebar %}
+    {% include "public/sidebar_resource.html" %}
+{% endblock %}
+
+
+{% block css %}
+
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+<!-- content main container -->
+<div class="main">
+
+<!-- row -->
+<div class="row">
+
+    <!-- col 12 -->
+    <div class="col-md-12">
+
+    <!-- tile -->
+    <section class="tile color transparent-black">
+
+
+
+        <!-- tile header -->
+        <div class="tile-header">
+            <h1><strong>同步主机到zabbix</strong></h1>
+            <div class="controls">
+              <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+              <a href="#" class="remove"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <!-- /tile header -->
+
+        <!-- tile body -->
+        <div class="tile-body">
+
+
+
+            <form method="post" action="#" role="form" parsley-validate id="basicvalidations">
+
+            <div class="col-sm-4" id="myproperlabel">
+                {% for host in hostlist %}
+                    <div class="checkbox check-transparent">
+                        <input type="checkbox" name="host" value="{{ host.id }}" id="opt{{ forloop.counter }}" parsley-group="mygroup" parsley-trigger="change" parsley-required="true" parsley-mincheck="1" parsley-error-container="#myproperlabel .last">
+                        <label for="opt{{ forloop.counter }}">{{ host.hostname }}</label>
+                    </div>
+
+                {% endfor %}
+            </div>
+
+            <div class="col-sm-7">
+                <div class="form-group">
+                    <label for="input07" class="col-sm-5 control-label">同步主机到批定组 *</label>
+                    <div class="col-sm-8" id="selectbox">
+                      <select class="chosen-select chosen-transparent form-control" name="group" id="input07" parsley-trigger="change" parsley-required="true" parsley-error-container="#selectbox">
+                        <option value="">请选择</option>
+                        {% for group in hostgroups %}
+                        <option value="{{ group.groupid }}">{{ group.name }}<option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-8">
+                      <button type="submit" class="btn btn-primary">提交</button>
+                      <button type="reset" class="btn btn-default">重置</button>
+                    </div>
+                  </div>
+            </div>
+            </form>
+
+            <div style="clear: both"></div>
+
+        </div>
+        <!-- /tile body -->
+
+    </section>
+    <!-- /tile -->
+
+    </div>
+    <!-- /col 6 -->
+
+    <!-- col 12 -->
+
+</div>
+<!-- /row -->
+{% endblock %}
+{% block js %}
+    <script>
+        $(function(){
+
+          //chosen select input
+          $(".chosen-select").chosen({disable_search_threshold: 10});
+
+        })
+
+    </script>
+
+{% endblock %}

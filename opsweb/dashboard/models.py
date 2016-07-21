@@ -56,3 +56,32 @@ class Product(models.Model):
     module_letter   = models.CharField(max_length=32)
     dev_interface   = models.CharField(max_length=100, null=True)
     op_interface    = models.CharField(max_length=100, null=True)
+
+    class Meta:
+        db_table = "resources_product"
+
+class Zabbix(models.Model):
+    cmdb_hostid     = models.IntegerField(db_index=True, null=True)
+    hostid       = models.IntegerField(db_index=True, null=True)
+    host        = models.CharField(max_length=50,db_index=True, null=True)
+    ip              = models.CharField(max_length=50,db_index=True, null=True)
+    updatetime      = models.DateTimeField()
+    def __str__(self):
+        return "{} {}".format(self.hostid, self.host)
+
+    class Meta:
+        db_table = "resources_zabbix"
+
+class Idc(models.Model):
+    name            = models.CharField(max_length=10)
+    idc_name        = models.CharField(max_length=30)
+    address         = models.CharField(max_length=255)
+    phone           = models.CharField(max_length=15)
+    email           = models.EmailField(max_length=255)
+    user_interface  = models.CharField(max_length=50)
+    user_phone      = models.CharField(max_length=20)
+    rel_cabinet_num  = models.IntegerField()
+    pact_cabinet_num = models.IntegerField()
+
+    class Meta:
+        db_table = "resources_idc"

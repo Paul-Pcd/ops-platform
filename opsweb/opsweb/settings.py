@@ -112,3 +112,10 @@ STATICFILES_DIRS = (
 
 
 ACTION_JUMP = "public/action_jump.html"
+
+
+# zabbix config
+
+ZABBIX_URL = "http://192.168.99.15/zabbix/"
+ZABBIX_USER = "admin"
+ZABBIX_PASS = "zabbix"

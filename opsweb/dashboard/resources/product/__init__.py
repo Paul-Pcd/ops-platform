@@ -37,4 +37,4 @@ class ProductAddView(TemplateView):
 class ProductJsonResponse(View):
     def get(self, request):
         product = serializers.serialize('json', Product.objects.all())
-        return HttpResponse(product, content_type='json')
+        return HttpResponse(product, content_type='application/json')
