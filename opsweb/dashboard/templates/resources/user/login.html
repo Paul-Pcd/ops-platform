@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>APOLLO运维平台 - 登陆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/css/vendor/bootstrap-checkbox.css">
+
+    <link href="/static/assets/css/minimal.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="/static/assets/js/html5shiv.js"></script>
+      <script src="/static/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="bg-1">
+ 
+
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+      <!-- Make page fluid -->
+      <div class="row">
+        <!-- Page content -->
+        <div id="content" class="col-md-12 full-page login">
+
+
+          <div class="inside-block">
+            <img src="/static/images/logo-1.png" alt class="logo">
+            <h1>APOLLO运维平台</h1>
+
+            <form id="form-signin" class="form-signin" method="post">
+              <section>
+                <div class="input-group">
+                  <input type="text" class="form-control" name="username" autocomplete="off" placeholder="用户名">
+                  <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                </div>
+                <div class="input-group">
+                  <input type="password" class="form-control" name="password" autocomplete="off" placeholder="密码">
+                  <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                </div>
+              </section>
+              <section class="controls">
+                <div class="checkbox check-transparent">
+                  <input type="checkbox" value="1" id="remember" checked>
+                  <label for="remember">记住用户名</label>
+                </div>
+                <a href="#">忘记密码</a>
+              </section>
+              <section class="log-in">
+                <button class="btn btn-greensea" id="login_btn">登&nbsp;&nbsp;陆</button>
+              </section>
+            </form>
+          </div>
+
+
+        </div>
+        <!-- /Page content -->  
+      </div>
+    </div>
+    <!-- Wrap all page content end -->
+  </body>
+</html>

@@ -1,0 +1,107 @@
+{% extends "ncfgroup/base.html" %}
+
+{% block sidebar %}
+    {% include "ncfgroup/sidebar_resource.html" %}
+{% endblock %}
+
+
+{% block content %}
+
+<!-- content main container -->
+<div class="main">
+
+<!-- row -->
+<div class="row">
+
+    <!-- col 12 -->
+    <div class="col-md-12">
+
+    <!-- tile -->
+    <section class="tile color transparent-black">
+
+
+
+        <!-- tile header -->
+        <div class="tile-header">
+            <h1><strong>zabbix 维护列表</strong></h1>
+             <a class="btn btn-default" href="/resources/monitor/zabbix/maintenance/" role="button">维护主机</a>
+            <div class="controls">
+              <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+              <a href="#" class="remove"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <!-- /tile header -->
+
+        <!-- tile body -->
+        <div class="tile-body">
+            <div class="table-responsive">
+             <table  class="table table-datatable table-custom" id="basicDataTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>主机名</th>
+                        <th>维护开始时间</th>
+                        <th>维护结束时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in maintenance %}
+                    <tr>
+                        <td> {{ forloop.counter }} </td>
+
+                        <td> {{ m.hostname }} </td>
+                        <td> {{ m.active_since }} </td>
+                        <td> {{ m.active_till }} </td>
+                        <td>
+                        <!--
+                        <button type="button" class="btn btn-success clear" data="{{ m.maintenanceid }}" >提前取消维护</button>
+                        -->
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+        <!-- /tile body -->
+
+    </section>
+    <!-- /tile -->
+
+    </div>
+    <!-- /col 6 -->
+
+    <!-- col 12 -->
+
+</div>
+<!-- /row -->
+{% endblock %}
+{% block js %}
+    <script>
+        $(function(){
+
+
+
+
+            $(".clear").click(function(){
+                btn = $(this)
+                maintenanceid = btn.attr('data');
+                $.post('/resources/monitor/monitor_del_maintenance_host', {maintenanceid:maintenanceid}, function(data){
+                    if(data == 1){
+                        btn.parents('tr').remove();
+                        swal("添加成功!", "", "success");
+                    }else{
+                        swal("添加失败!", data, "error");
+                    }
+                })
+            });
+        })
+
+    </script>
+
+{% endblock %}
+
+

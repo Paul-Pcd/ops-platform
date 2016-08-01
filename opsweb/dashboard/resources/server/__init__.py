@@ -8,6 +8,8 @@ from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView, ListView, View
 from django.http import Http404
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from dashboard.models import Server, Status, Product, Idc
 
@@ -18,6 +20,8 @@ class AutoReportingView(View):
     """
         服务器信息自动上报
     """
+
+    @method_decorator(login_required)
     def post(self, request):
         data = request.POST.dict()
         data['check_update_time'] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
@@ -43,12 +47,14 @@ class ServerListView(ListView):
     model = Server
     context_object_name = "server_list"
 
+
     def get_context_data(self, **kwargs):
         context = super(ServerListView, self).get_context_data(**kwargs)
         context["title"] = "服务器列表信息"
         context['products'] = Product.objects.all()
         return context
 
+    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         response = super(ServerListView, self).get(request, *args, **kwargs)
         return response
@@ -59,6 +65,7 @@ class ServerModifyStatusView(TemplateView):
 
     template_name = "resources/server/server_modify_status.html"
 
+    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         server_id = request.GET.get("server_id")
 
@@ -71,7 +78,7 @@ class ServerModifyStatusView(TemplateView):
         except Server.DoesNotExist:
             raise Http404
 
-
+    @method_decorator(login_required)
     def post(self, request):
         ret = {"status": 0}
         try:
@@ -84,6 +91,7 @@ class ServerModifyProductView(TemplateView):
 
     template_name = "resources/server/server_modify_product.html"
 
+    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         server_id = request.GET.get("server_id")
 
@@ -96,7 +104,7 @@ class ServerModifyProductView(TemplateView):
         except Server.DoesNotExist:
             raise Http404
 
-
+    @method_decorator(login_required)
     def post(self, request):
         ret = {"status": 0}
 

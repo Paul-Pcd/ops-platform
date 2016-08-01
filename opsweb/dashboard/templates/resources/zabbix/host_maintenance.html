@@ -1,0 +1,211 @@
+{% extends "ncfgroup/base.html" %}
+
+{% block sidebar %}
+    {% include "ncfgroup/sidebar_resource.html" %}
+{% endblock %}
+
+
+{% block css %}
+
+<style>
+
+    #table_id tr td{line-height: 40px;}
+    #zb_content{padding-left:20px; margin-top:20px;}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- content main container -->
+<div class="main">
+
+<!-- row -->
+<div class="row">
+
+    <!-- col 12 -->
+    <div class="col-md-12">
+
+    <!-- tile -->
+    <section class="tile color transparent-black">
+
+
+
+        <!-- tile header -->
+        <div class="tile-header">
+            <h1><strong>维护主机</strong></h1>
+            <div class="controls">
+              <a href="#" class="refresh"><i class="fa fa-refresh"></i></a>
+              <a href="#" class="remove"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <!-- /tile header -->
+
+        <!-- tile body -->
+        <div class="tile-body">
+            <div class="row">
+
+                <div class="col-md-3" id="tree"></div>
+
+                <div class="col-md-7">
+                    <form class="form-horizontal" role="form" parsley-validate id="basicvalidations">
+                    <div class="form-group">
+                        <label for="birthdate" class="col-sm-3 control-label">维护开始时间: *</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control"  name="expire" id="maintenance_start_time" value="{{ current_data }}" placeholder="YYYY-MM-DD hh:ii">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="input07" class="col-sm-3 control-label">维护时长: *</label>
+                        <div class="col-sm-8" id="selectbox">
+                            <select class="chosen-select chosen-transparent form-control" name="expire" id="maintenance_end_time" >
+                                <option value="0.1" selected>10分种</option>
+                                <option value="0.5" selected>30分种</option>
+                                <option value="1" selected>1小时</option>
+                                <option value="2" selected>2小时</option>
+                                <option value="4" selected>4小时</option>
+                                <option value="8">8小时</option>
+                                <option value="12">12小时</option>
+                                <option value="24">1天</option>
+                                <option value="48">2天</option>
+                                <option value="72">3天</option>
+                                <option value="120">5天</option>
+                                <option value="168">7天</option>
+                                <option value="260">15天</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group form-footer">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <button type="button" class="btn btn-primary" id="create_maintenance">创建维护</button>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" id="zb_content">
+
+
+                    </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <!-- /tile body -->
+
+    </section>
+    <!-- /tile -->
+
+    </div>
+    <!-- /col 6 -->
+
+    <!-- col 12 -->
+
+</div>
+<!-- /row -->
+{% endblock %}
+
+
+
+
+
+
+{% block js %}
+    <script src="/static/js/bootstrap-treeview.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script>
+    function getTree() {
+      // Some logic to retrieve, or generate tree structure
+        var tree = {{ treeview|safe }};
+        return tree;
+    }
+
+    $(function(){
+
+
+      //chosen select input
+      $(".chosen-select").chosen({disable_search_threshold: 10});
+
+
+        var zb_content = $("#zb_content");
+
+
+        $('#tree').treeview({
+            data: getTree(),
+            onNodeSelected: function(event, data){
+                if (data.pid == null){
+                    return false
+                }
+                service_id = data.pid;
+                product_id = data.id;
+                $.post("/resources/monitor/ajax/get_zabbix_host_by_group", {service_id: service_id, server_purpose: product_id} , function(data){
+                    zb_content.empty()
+                    zabbix_data = JSON.parse(data);
+                    console.log(zabbix_data)
+                    $.each(zabbix_data, function(n, obj){
+                    html = '<div class="checkbox check-transparent last">';
+                    html += '<input type="checkbox" id="opt'+n+'" name="zabbix_hosts" class="zabbix_hosts" value="'+obj.hostid+'" parsley-group="mygroup" parsley-trigger="change" parsley-required="true" parsley-mincheck="1" parsley-error-container="#myproperlabel .last">';
+                    html += '<label for="opt'+n+'" class="host_lable">'+ obj.name +'</label>';
+                    html += '</div>';
+                    zb_content.append(html);
+                });
+                });
+            },
+            onNodeUnselected: function(event, data){
+
+            }
+        }).treeview("collapseAll", {silent:"true"});
+
+
+        // 时间插件
+        $('.maintenance').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            language: 'zh-CN',
+            autoclose: 1,
+
+        });
+
+        $("#create_maintenance").click(function(){
+            var hostids = new Array();
+            $("input[name='zabbix_hosts']:checked").each(function (i, n) {
+                hostids[i] = n.value
+            });
+            if(hostids.length < 1){
+                swal("操作失败", "请选择维护主机", "error")
+                return false
+            }
+
+            var maintenance_start_time = $("#maintenance_start_time");
+            var maintenance_end_time = $("#maintenance_end_time");
+            if (maintenance_start_time.val() == ''){
+                swal("操作失败", "维护开始时间不能为空", "error");
+                return false
+            }
+            if (maintenance_end_time.val() == ''){
+                swal("操作失败", "维护结束时间不能为空", "error");
+                return false
+            }
+            $.post('#',
+                    {hostids:hostids.toString(),start:maintenance_start_time.val(),end:maintenance_end_time.val()},
+                    function(data){
+
+                        if(data.status == 0){
+                            swal("添加成功!", "", "success");
+                            $(".confirm").click(function(){
+                                setTimeout(function(){
+                                    window.location.href = "/resources/monitor/zabbix/maintenance/list/"
+                                }, 500 )
+                            })
+                        }else{
+                            swal("操作失败", data.errmsg, "error");
+                        }
+            });
+        });
+
+    })
+
+    </script>
+{% endblock %}
+
